@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <div class="header">
+        <h1>🛡️ ExfilGuard</h1>
+        <p class="subtitle">Real-time Data Exfiltration Auditor</p>
+        <div style="margin-top: 10px;">
+            <span class="status-indicator"></span>
+            <span style="font-size: 11px;">Monitoring Active</span>
+        </div>
+    </div>
+    
+    <div class="stats">
+        <div class="stat-item">
+            <div class="stat-value" id="totalEvents">0</div>
+            <div class="stat-label">Total Events</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value critical" id="highRiskEvents">0</div>
+            <div class="stat-label">High Risk</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value" id="activeSites">0</div>
+            <div class="stat-label">Active Sites</div>
+        </div>
+    </div>
+    
+    <div class="recent-events">
+        <h3>📋 Recent Alerts</h3>
+        <div id="eventsList">
+            <div class="empty-state">No threats detected yet<br>Browsing safely!</div>
+        </div>
+    </div>
+    
+    <div class="actions">
+        <button class="btn-primary" id="dashboardBtn">
+            📊 Dashboard
+        </button>
+        <button class="btn-secondary" id="clearBtn">
+            🗑️ Clear
+        </button>
+        <button class="btn-primary" id="refreshBtn">
+            🔄 Refresh
+        </button>
+    </div>
+    
+    <div class="footer">
+        <div id="lastUpdate">Last updated: Never</div>
+    </div>
+    </script>
+    
+    <script src="popup.js"></script>
+</body>
+</html>

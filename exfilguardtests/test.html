@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ExfilGuard Test Suite</title>
+    <style>
+        .test-section { margin: 20px; padding: 15px; border: 1px solid #ccc; }
+        .pass { color: green; } .fail { color: red; }
+        button { margin: 5px; padding: 10px; }
+    </style>
+</head>
+<body>
+    <h1>🧪 ExfilGuard Test Suite</h1>
+    
+    <div class="test-section">
+        <h3>1. Form Input Tests</h3>
+        <input type="password" placeholder="Enter password">
+        <input type="text" name="credit_card" placeholder="Credit card">
+        <button onclick="this.innerHTML='✓ Done'">Type in fields</button>
+        <span class="result"></span>
+    </div>
+    
+    <div class="test-section">
+        <h3>2. Clipboard Tests</h3>
+        <button onclick="navigator.clipboard.writeText('Sensitive: token=abc123')">
+            Copy Sensitive Text
+        </button>
+        <span class="result"></span>
+    </div>
+    
+    <div class="test-section">
+        <h3>3. Network Tests</h3>
+        <button onclick="fetch('/', {body: 'password=test'})">
+            Send Sensitive Fetch
+        </button>
+        <span class="result"></span>
+    </div>
+    
+    <div class="test-section">
+        <h3>4. Check Results</h3>
+        <button onclick="checkResults()">Check ExfilGuard Events</button>
+        <div id="results"></div>
+    </div>
+    
+    <script>
+    function checkResults() {
+        if (typeof chrome !== 'undefined' && chrome.runtime) {
+            chrome.runtime.sendMessage({type: "GET_EVENTS"}, (response) => {
+                const events = response?.events || [];
+                const html = `
+                    <h4>${events.length} Events Detected</h4>
+                    ${events.map(e => `
+                        <div>${e.type} - ${e.severity}</div>
+                    `).join('')}
+                `;
+                document.getElementById('results').innerHTML = html;
+            });
+        }
+    }
+    
+    // Auto-run tests
+    setTimeout(() => {
+        console.log('ExfilGuard Test Suite Loaded');
+        // Auto-fill test fields
+        document.querySelector('input[type="password"]').value = 'test123';
+    }, 1000);
+    </script>
+</body>
+</html>

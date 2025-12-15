@@ -1,0 +1,177 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2024-01-15",
+  "rules": [
+    {
+      "id": "password_detection",
+      "name": "Password Field Detection",
+      "description": "Detects password input fields",
+      "type": "form_input",
+      "patterns": ["password", "passwd", "pwd", "secret"],
+      "severity": "high",
+      "enabled": true
+    },
+    {
+      "id": "credit_card_detection",
+      "name": "Credit Card Detection",
+      "description": "Detects credit card related fields",
+      "type": "form_input",
+      "patterns": ["credit", "card", "cc", "cvv", "expiry"],
+      "severity": "high",
+      "enabled": true
+    },
+    {
+      "id": "sensitive_network_data",
+      "name": "Sensitive Network Data",
+      "description": "Detects sensitive data in network requests",
+      "type": "network",
+      "patterns": ["password=", "credit_card=", "ssn=", "token="],
+      "severity": "critical",
+      "enabled": true
+    },
+    {
+      "id": "clipboard_large_data",
+      "name": "Large Clipboard Data",
+      "description": "Detects large copy/paste operations",
+      "type": "clipboard",
+      "threshold": 100,
+      "severity": "medium",
+      "enabled": true
+    },
+    {
+      "id": "auth_token_storage",
+      "name": "Auth Token Storage Access",
+      "description": "Detects access to authentication tokens in storage",
+      "type": "storage",
+      "patterns": ["token", "auth", "session", "jwt"],
+      "severity": "high",
+      "enabled": true
+    },
+    {
+      "id": "social_security_detection",
+      "name": "Social Security Number Detection",
+      "description": "Detects SSN/National ID fields",
+      "type": "form_input",
+      "patterns": ["ssn", "social", "national.id", "tin"],
+      "severity": "critical",
+      "enabled": true
+    },
+    {
+      "id": "email_detection",
+      "name": "Email Field Detection",
+      "description": "Detects email input fields",
+      "type": "form_input",
+      "patterns": ["email", "e.mail", "mail"],
+      "severity": "medium",
+      "enabled": true
+    },
+    {
+      "id": "phone_detection",
+      "name": "Phone Number Detection",
+      "description": "Detects phone number fields",
+      "type": "form_input",
+      "patterns": ["phone", "mobile", "tel", "cell"],
+      "severity": "medium",
+      "enabled": true
+    },
+    {
+      "id": "address_detection",
+      "name": "Address Field Detection",
+      "description": "Detects address fields",
+      "type": "form_input",
+      "patterns": ["address", "street", "city", "zip", "postal"],
+      "severity": "low",
+      "enabled": true
+    },
+    {
+      "id": "form_sniffing_pattern",
+      "name": "Form Sniffing Detection",
+      "description": "Detects scripts accessing form values",
+      "type": "script_analysis",
+      "patterns": [".value\\s*=", "getElementById.*\\.value", "querySelector.*input.*value"],
+      "severity": "medium",
+      "enabled": true
+    },
+    {
+      "id": "external_domain_request",
+      "name": "External Domain Request",
+      "description": "Detects data sent to external domains",
+      "type": "network",
+      "severity": "medium",
+      "enabled": true,
+      "checkFunction": "checkExternalDomain"
+    },
+    {
+      "id": "crypto_mining_detection",
+      "name": "Cryptocurrency Mining Detection",
+      "description": "Detects crypto mining scripts",
+      "type": "script_analysis",
+      "patterns": ["coinimp", "cryptonight", "webassembly", "miner"],
+      "severity": "high",
+      "enabled": true
+    }
+  ],
+  "severityLevels": {
+    "critical": 4,
+    "high": 3,
+    "medium": 2,
+    "low": 1,
+    "info": 0
+  },
+  "severityColors": {
+    "critical": "#dc3545",
+    "high": "#ff6b6b",
+    "medium": "#ffa726",
+    "low": "#4CAF50",
+    "info": "#17a2b8"
+  },
+  "severityLabels": {
+    "critical": "Critical",
+    "high": "High",
+    "medium": "Medium",
+    "low": "Low",
+    "info": "Info"
+  },
+  "defaultSettings": {
+    "minSeverity": "low",
+    "enableDesktopNotifications": true,
+    "enableOverlayAlerts": true,
+    "enableSoundAlerts": false,
+    "storageLimit": 1000,
+    "cleanupDays": 7,
+    "autoExport": false
+  },
+  "eventTypes": {
+    "form_input": "Form Input",
+    "clipboard_copy": "Clipboard Copy",
+    "clipboard_paste": "Clipboard Paste",
+    "fetch_request": "Fetch Request",
+    "xhr_request": "XHR Request",
+    "localstorage_read": "LocalStorage Read",
+    "localstorage_write": "LocalStorage Write",
+    "sessionstorage_read": "SessionStorage Read",
+    "sessionstorage_write": "SessionStorage Write",
+    "script_analysis": "Script Analysis",
+    "page_load": "Page Load"
+  },
+  "thresholds": {
+    "clipboardLargeData": 100,
+    "networkDataSize": 1024,
+    "formValueLength": 50,
+    "consecutiveEvents": 10,
+    "timeWindowMinutes": 5
+  },
+  "ignoreDomains": [
+    "localhost",
+    "127.0.0.1",
+    "google.com",
+    "github.com",
+    "stackoverflow.com"
+  ],
+  "ignorePatterns": [
+    "^chrome-extension://",
+    "^moz-extension://",
+    "^about:",
+    "^data:"
+  ]
+}

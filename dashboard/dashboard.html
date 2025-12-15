@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExfilGuard Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="header">
+            <div class="logo">🛡️</div>
+            <h1>ExfilGuard Dashboard</h1>
+            <p>Real-time Data Exfiltration Monitoring System</p>
+        </div>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Total Events Detected</div>
+                <div class="stat-value" id="totalEvents">0</div>
+                <div class="stat-label">24-hour period</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-label">High Risk Events</div>
+                <div class="stat-value critical" id="highRiskEvents">0</div>
+                <div class="stat-label">Requires attention</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-label">Protected Websites</div>
+                <div class="stat-value" id="protectedSites">1</div>
+                <div class="stat-label">Currently monitoring</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-label">Data Blocks</div>
+                <div class="stat-value" id="dataBlocks">0</div>
+                <div class="stat-label">Prevented transmissions</div>
+            </div>
+        </div>
+        
+        <div class="events-table">
+            <h2 style="margin-bottom: 20px;">Recent Security Events</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>Event Type</th>
+                        <th>Severity</th>
+                        <th>Source</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody id="eventsTableBody">
+                    <tr>
+                        <td colspan="5" style="text-align: center; padding: 40px;">
+                            <div style="opacity: 0.6;">Loading events...</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="controls">
+            <button id="refreshBtn">
+                <span>🔄</span> Refresh Data
+            </button>
+            <button id="clearBtn">
+                <span>🗑️</span> Clear All Events
+            </button>
+            <button id="exportBtn">
+                <span>📥</span> Export Report
+            </button>
+        </div>
+        
+        <div class="footer">
+            <p>ExfilGuard v1.0 • Real-time browser data exfiltration auditor</p>
+            <p>For security research and privacy protection</p>
+        </div>
+    </div>
+    
+    <!-- External JavaScript file -->
+    <script src="dashboard.js"></script>
+</body>
+</html>

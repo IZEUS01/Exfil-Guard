@@ -1,0 +1,41 @@
+/* Overlay Manager Styles */
+.exfilguard-sensitive-field {
+  animation: fieldPulse 2s infinite;
+  outline: 2px solid #ff6b6b !important;
+  outline-offset: 2px !important;
+}
+
+@keyframes fieldPulse {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(255, 107, 107, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(255, 107, 107, 0.8);
+  }
+}
+
+.exfilguard-block-overlay {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  background: rgba(220, 53, 69, 0.05) !important;
+  border: 2px dashed rgba(220, 53, 69, 0.3) !important;
+  z-index: 999997 !important;
+  pointer-events: none !important;
+  animation: fadeIn 0.5s ease-out !important;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+code {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-family: 'Monaco', 'Consolas', monospace;
+  font-size: 0.9em;
+}
